@@ -9,8 +9,8 @@
         <version>1.5.4.RELEASE</version>
     </parent>
 
-    <groupId>com.sverze.examples.spring.twotier</groupId>
-    <artifactId>aws-terraform-2-tier-service</artifactId>
+    <groupId>com.sverze.examples.spring.squid</groupId>
+    <artifactId>aws-terraform-squid-proxy-vpc</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
     <name>${project.artifactId}</name>

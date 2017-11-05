@@ -9,39 +9,49 @@ variable "aws_region" {
   default     = "eu-west-2"
 }
 
-variable "aws_vpc_cidr" {
-  description = "VPC CIDR block range"
-  default     = "10.0.0.0/16"
+variable "aws_public_vpc_cidr" {
+  description = "VPC CIDR block range for the public VPC"
+  default     = "10.1.0.0/16"
 }
 
-variable "aws_red_sn_az_a_cidr" {
-  description = "Red subnet availability zone A CIDR block range"
-  default     = "10.0.1.0/24"
+variable "aws_private_vpc_cidr" {
+  description = "VPC CIDR block range for the private VPC"
+  default     = "10.2.0.0/16"
 }
 
-variable "aws_red_sn_az_b_cidr" {
-  description = "Red subnet availability zone B CIDR block range"
-  default     = "10.0.2.0/24"
+variable "aws_sn_1_cidr" {
+  description = "Subnet availability zone A CIDR block range for NAT gateways"
+  default     = "10.1.1.0/24"
 }
 
-variable "aws_amb_sn_az_a_cidr" {
-  description = "Amber subnet availability zone A CIDR block range"
-  default     = "10.0.3.0/24"
+variable "aws_sn_2_cidr" {
+  description = "Subnet availability zone B CIDR block range for NAT gateways"
+  default     = "10.1.2.0/24"
 }
 
-variable "aws_amb_sn_az_b_cidr" {
-  description = "Amber subnet availability zone B CIDR block range"
-  default     = "10.0.4.0/24"
+variable "aws_sn_3_cidr" {
+  description = "Subnet availability zone A CIDR block range for Squid proxies"
+  default     = "10.1.3.0/24"
 }
 
-variable "aws_grn_sn_az_a_cidr" {
-  description = "Green subnet availability Zone A CIDR block range"
-  default     = "10.0.5.0/24"
+variable "aws_sn_4_cidr" {
+  description = "Subnet availability zone B CIDR block range for Squid proxies"
+  default     = "10.1.4.0/24"
 }
 
-variable "aws_grn_sn_az_b_cidr" {
-  description = "Green subnet availability Zone B CIDR block range"
-  default     = "10.0.6.0/24"
+variable "aws_sn_5_cidr" {
+  description = "Subnet availability zone C CIDR block range for bastion instance"
+  default     = "10.1.5.0/24"
+}
+
+variable "aws_sn_6_cidr" {
+  description = "Subnet availability zone A CIDR block range for test instance"
+  default     = "10.2.1.0/24"
+}
+
+variable "aws_sn_7_cidr" {
+  description = "Subnet availability zone B CIDR block range for test instance"
+  default     = "10.2.2.0/24"
 }
 
 variable "aws_key_name" {
