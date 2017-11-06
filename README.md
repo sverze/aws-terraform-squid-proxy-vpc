@@ -104,7 +104,7 @@ TODO - more details to follow
 
 ### Destroy
 
-Clean uo your environment by detroying, this will remove all traces:
+Clean up your environment by detroying, this will remove all traces:
 
 ```commandline
 terraform destroy -var 'aws_key_name=your-key.pem'

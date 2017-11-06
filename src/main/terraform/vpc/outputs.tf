@@ -6,30 +6,42 @@ output "vpc_2_id" {
   value = "${aws_vpc.vpc_2.id}"
 }
 
-output "red_sn_1_id" {
+output "sn_1_id" {
   value = "${aws_subnet.sn_1.id}"
 }
 
-output "red_sn_2_id" {
+output "sn_2_id" {
   value = "${aws_subnet.sn_2.id}"
 }
 
-output "red_sn_3_id" {
+output "sn_3_id" {
   value = "${aws_subnet.sn_3.id}"
 }
 
-output "red_sn_4_id" {
+output "sn_4_id" {
   value = "${aws_subnet.sn_4.id}"
 }
 
-output "red_sn_5_id" {
+output "sn_5_id" {
   value = "${aws_subnet.sn_5.id}"
 }
 
-output "red_sn_6_id" {
+output "sn_6_id" {
   value = "${aws_subnet.sn_6.id}"
 }
 
-output "red_sn_7_id" {
+output "sn_7_id" {
   value = "${aws_subnet.sn_7.id}"
+}
+
+output "sg_1_id" {
+  value = "${aws_security_group.sg_1.id}"
+}
+
+output "sg_2_id" {
+  value = "${aws_security_group.sg_2.id}"
+}
+
+output "sg_3_id" {
+  value = "${aws_security_group.sg_3.id}"
 }

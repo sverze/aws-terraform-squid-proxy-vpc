@@ -195,7 +195,7 @@ resource "aws_route_table_association" "rta_1" {
   route_table_id               = "${aws_route_table.rt_1.id}"
 }
 
-# Subnet 2 in Availability Zone B for NAT gateway 1
+# Subnet 2 in Availability Zone B for NAT gateway 2
 resource "aws_subnet" "sn_2" {
   vpc_id                       = "${aws_vpc.vpc_1.id}"
   cidr_block                   = "${var.aws_sn_2_cidr}"
@@ -263,7 +263,7 @@ resource "aws_route_table_association" "rta_5" {
   route_table_id               = "${aws_route_table.rt_5.id}"
 }
 
-# Subnet 6 in Availability Zone A for Test Hosts
+# Subnet 6 in Availability Zone A for Application Test Hosts
 resource "aws_subnet" "sn_6" {
   vpc_id                       = "${aws_vpc.vpc_2.id}"
   cidr_block                   = "${var.aws_sn_6_cidr}"
@@ -280,7 +280,7 @@ resource "aws_route_table_association" "rta_6" {
   route_table_id               = "${aws_route_table.rt_4.id}"
 }
 
-# Subnet 7 in Availability Zone B for Test Hosts
+# Subnet 7 in Availability Zone B for Application Test Hosts
 resource "aws_subnet" "sn_7" {
   vpc_id                       = "${aws_vpc.vpc_2.id}"
   cidr_block                   = "${var.aws_sn_7_cidr}"
@@ -305,7 +305,6 @@ resource "aws_route_table_association" "rta_7" {
 resource "aws_security_group" "sg_1" {
   name                         = "${var.environment_name}_sg_1"
   vpc_id                       = "${aws_vpc.vpc_1.id}"
-
 
   # SSH access only from Bastion network
   ingress {
