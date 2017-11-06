@@ -1,11 +1,10 @@
 # AWS / Terraform Squid Proxy VPC
 
-This project aims to build a secure network hosting resilient micro services and a database cluster all in [AWS](https://aws.amazon.com/).
-The provisioing of all the infrastructure and services is done using [Terraform](https://www.terraform.io/).
-The micro services are [Spring Boot](https://projects.spring.io/spring-boot/) java containers offering a simple RESTfull CRuD service.
-The data base cluster is an [RDS Aurora](https://aws.amazon.com/rds/aurora) cluster.
-
-The following diagram depicts what you can build if you follow the subsequent instructions.
+This project puts together a public network containing an auto scaled group of [Squid Proxy](http://squid-proxy.net/) servers configured 
+to access the internet using NAT Gateways and an egress Internet Gateways. A private VPC is also created peered with the public VPC with proxy 
+traffic routed to the Squid Proxy Elastic Load Balancer.
+The provisioning of all the infrastructure and services is done using [Terraform](https://www.terraform.io/).
+All compute servers use the T2 micros with Amazon Linux, note that the architecture shown below requires a region with a minimum of 3 availability zones.
 
 ![Resilent VPC](aws-terraform-squid-proxy-vpc.png)
 
@@ -36,11 +35,6 @@ ssh-add -K your-key.pem
 Install terraform command line tool. Depends on your OS, [Install Terraform](https://www.terraform.io/intro/getting-started/install.html) has some descent instructions.
 
 If you are using OSX I suggest you use [Homebrew](https://brew.sh/) to install the terraform package.
-
-### Anything Else
-
-If you intend to play around with the micro-service you will need a few other tools as well.
-There will be further instructions on setting up the micro service a little latter.
 
 ## Building / Running
 

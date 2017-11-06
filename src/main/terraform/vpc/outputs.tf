@@ -1,39 +1,35 @@
-output "vpc_id" {
-  value = "${aws_vpc.vpc.id}"
+output "vpc_1_id" {
+  value = "${aws_vpc.vpc_1.id}"
 }
 
-output "red_sn_az_a_id" {
-  value = "${aws_subnet.red_sn_az_a.id}"
+output "vpc_2_id" {
+  value = "${aws_vpc.vpc_2.id}"
 }
 
-output "red_sn_az_b_id" {
-  value = "${aws_subnet.red_sn_az_b.id}"
+output "red_sn_1_id" {
+  value = "${aws_subnet.sn_1.id}"
 }
 
-output "red_sg_id" {
-  value = "${aws_security_group.red_sg.id}"
+output "red_sn_2_id" {
+  value = "${aws_subnet.sn_2.id}"
 }
 
-output "amb_sn_az_a_id" {
-  value = "${aws_subnet.amb_sn_az_a.id}"
+output "red_sn_3_id" {
+  value = "${aws_subnet.sn_3.id}"
 }
 
-output "amb_sn_az_b_id" {
-  value = "${aws_subnet.amb_sn_az_b.id}"
+output "red_sn_4_id" {
+  value = "${aws_subnet.sn_4.id}"
 }
 
-output "amb_sg_id" {
-  value = "${aws_security_group.amb_sg.id}"
+output "red_sn_5_id" {
+  value = "${aws_subnet.sn_5.id}"
 }
 
-output "grn_sn_az_a_id" {
-  value = "${aws_subnet.grn_sn_az_a.id}"
+output "red_sn_6_id" {
+  value = "${aws_subnet.sn_6.id}"
 }
 
-output "grn_sn_az_b_id" {
-  value = "${aws_subnet.grn_sn_az_b.id}"
-}
-
-output "grn_sg_id" {
-  value = "${aws_security_group.grn_sg.id}"
+output "red_sn_7_id" {
+  value = "${aws_subnet.sn_7.id}"
 }

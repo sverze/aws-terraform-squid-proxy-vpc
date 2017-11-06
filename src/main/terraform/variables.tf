@@ -6,7 +6,7 @@ variable "environment_name" {
 
 variable "aws_region" {
   description = "AWS region to create the VPC and services"
-  default     = "eu-west-2"
+  default     = "eu-west-1"
 }
 
 # NOTE: The key should be available via your SSH agent, use ssh-add to add this key
