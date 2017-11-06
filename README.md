@@ -8,6 +8,39 @@ All compute servers use the T2 micros with Amazon Linux, note that the architect
 
 ![Resilent VPC](aws-terraform-squid-proxy-vpc.png)
 
+
+## Squid Configuration
+
+The Squid Proxy has been configured for testing purposes.
+The following changes have been made to the configuration found in _/etc/squid/squid.conf_
+
+### Network Configuration
+
+The network can be configured to accept single IP addresses or CIDR ranges. In our case we grant access all local traffic in 
+the public and private VPC
+
+```commandline
+acl localnet src 10.1.0.0/16
+acl localnet src 10.2.0.0/16
+```
+
+### Access Control
+
+We can control access to domains and websites, in our example we control access to the AWS SQS service and the Amazon AWS website it self.
+
+```commandline
+acl whitelist dstdomain sqs.us-west-1.amazonaws.com
+acl whitelist dstdomain sqs.us-west-2.amazonaws.com
+acl whitelist dstdomain sqs.eu-west-1.amazonaws.com
+acl whitelist dstdomain sqs.eu-west-2.amazonaws.com
+acl whitelist dstdomain sqs.eu-central-1.amazonaws.com
+acl whitelist dstdomain sqs.ap-southeast-1.amazonaws.com
+acl whitelist dstdomain sqs.ap-northeast-1.amazonaws.com
+acl whitelist dstdomain sqs.sa-east-1.amazonaws.com
+acl whitelist dstdomain sqs.ap-southeast-2.amazonaws.com
+acl whitelist dstdomain www.amazonaws.com
+```
+
 ## Set-Up
 
 You will need the following tools and accounts to make it happen
@@ -38,45 +71,41 @@ If you are using OSX I suggest you use [Homebrew](https://brew.sh/) to install t
 
 ## Building / Running
 
-### First Time
+### Plan
 
-There is an issue with the REST services not starting correctly if the Aurora cluster has not completed creation in time.
-Terraform should have proper module dependencies in place shortly, follow this thread [1178](https://github.com/hashicorp/terraform/issues/1178) for details.
-In the mean time the workaroud has been implemented although it does not always work.
+I suggest that you run a plan to determine that access to your AWS account is as expected.
+Run the following command in the root of the terraform source _src/main/terraform_
 
-The Aurora cluster takes quite a bit of time to create so I suggest that you target build that module first
 
 ```commandline
-terraform apply -target=module.aws_aurora_cluster
+terraform plan -var 'aws_key_name=your-key.pem'
 ```
 
-Once the Aurota cluster is up and running in the Green Zone of the VPC you are ready to apply the remaining template
+The output of this command will detail all the resources that will be created once applied.
+Note that the default region is set to _eu-west-1_, this value along with others can be overriden e.g.
 
 ```commandline
-terraform apply
+terraform plan -var 'aws_key_name=your-key.pem' -var 'aws_region=us-east-1'
 ```
 
-If you decide to build the whole estate upfront and the micro service did not start up correctly you have 2 option.
-Firstly you can SSH to the Amber Zone instances re-start the docker containers or secondly you can taint the instances and reapply the template.
-The following section explains how you do that.
+### Apply
 
-### Subsequent Times
-
-You will find that you may want to play around with the REST services which means you will redeploy them regularly.
-If you do get this point you will undoubtedly changed the terraform scripts to source your own REST docker servcie from your own registry.
-
-The following command is how to teardown the Amber Zone instances and redeploy them without destroying the entire stack.
+Once you are happy with the plan apply the changes as follows
 
 ```commandline
-terraform taint -module=aws_docker_amb_az_a aws_instance.docker
-terraform taint -module=aws_docker_amb_az_b aws_instance.docker
-terraform apply
+terraform apply -var 'aws_key_name=your-key.pem'
 ```
 
-## Microservice
+### Testing
+
+The best way to test the application is to SSH on to the test host and attempt accessing the internet.
+
+TODO - more details to follow
+
+### Destroy
+
+Clean uo your environment by detroying, this will remove all traces:
 
 ```commandline
-mvn clean package docker:build
-docker push sverze/aws-terraform-2-tier-service:latest
-docker run -p 8080:8080 aws-terraform-2-tier-service
+terraform destroy -var 'aws_key_name=your-key.pem'
 ```

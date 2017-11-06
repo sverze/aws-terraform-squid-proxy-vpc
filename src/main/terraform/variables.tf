@@ -19,3 +19,13 @@ variable "bastion_network_cidr" {
   description = "Bastion network CIDR block range, refine default to makeaccess more secure"
   default     = "81.97.16.0/24"
 }
+
+# Amazon Linux (x64)
+variable "aws_amis" {
+  default = {
+    us-east-1 = "ami-8c1be5f6"
+    us-east-2 = "ami-c5062ba0"
+    eu-west-1 = "ami-acd005d5"
+    eu-west-2 = "ami-1a7f6d7e"
+  }
+}
