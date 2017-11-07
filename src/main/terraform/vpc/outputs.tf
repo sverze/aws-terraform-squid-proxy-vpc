@@ -45,3 +45,11 @@ output "sg_2_id" {
 output "sg_3_id" {
   value = "${aws_security_group.sg_3.id}"
 }
+
+output "ng_1_id" {
+  value = "${aws_nat_gateway.ng_1.id}"
+}
+
+output "ng_2_id" {
+  value = "${aws_nat_gateway.ng_2.id}"
+}

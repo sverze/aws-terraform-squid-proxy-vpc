@@ -17,11 +17,17 @@ variable "aws_key_name" {
 
 variable "bastion_network_cidr" {
   description = "Bastion network CIDR block range, refine default to makeaccess more secure"
-  default     = "81.97.16.0/24"
+  default     = "199.253.241.0/24"
+}
+
+variable "squid_port" {
+  description = "Squid proxies ELB port"
+  default     = 3128
 }
 
 # Amazon Linux (x64)
 variable "aws_amis" {
+  type        = "map"
   default = {
     us-east-1 = "ami-8c1be5f6"
     us-east-2 = "ami-c5062ba0"

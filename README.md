@@ -100,6 +100,9 @@ terraform apply -var 'aws_key_name=your-key.pem'
 
 The best way to test the application is to SSH on to the test host and attempt accessing the internet.
 
+1. Copy your EC2 key to the bastion host - _scp -i <YOUR_KEY>.pem <YOUR_KEY>.pem ec2-user@<BASTION_HOST_IP>:.ssh/_
+2. SSH to the bastion host - _ssh ~/.ssh/<YOUR_KEY>.pem ec2-user@<BASTION_HOST_IP>_
+3. SSH to the application host - _ssh ~/.ssh/<YOUR_KEY>.pem ec2-user@<APPLICATION_HOST_IP>_
 TODO - more details to follow
 
 ### Destroy

@@ -66,7 +66,7 @@ resource "aws_internet_gateway" "ig_1" {
 
 
 resource "aws_eip" "eip_1" {
-  vpc      = true
+  vpc                          = true
 }
 
 # NAT Gateway for Availability Zone A

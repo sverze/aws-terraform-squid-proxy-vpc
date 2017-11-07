@@ -29,3 +29,23 @@ variable "aws_key_name" {
 variable "aws_ami" {
   description = "AWS AMI to use for the squid proxy hosts"
 }
+
+variable "aws_asg_min_size" {
+  description = "Auto scale group minimum size"
+  default     = 2
+}
+
+variable "aws_asg_max_size" {
+  description = "Auto scale group maximum size"
+  default     = 10
+}
+
+variable "squid_port" {
+  description = "Squid proxies ELB port"
+}
+
+variable "depends_on" {
+  description = "A list of reourse ID's that this module depends on in order to complete correctly"
+  type        = "list"
+  default     = []
+}

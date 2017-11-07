@@ -29,10 +29,10 @@ variable "aws_ami" {
   description = "AWS AMI to use for the application host"
 }
 
-variable "squid_proxies_uri" {
+variable "squid_dns_name" {
   description = "Squid proxies ELB URI"
 }
 
-variable "squid_proxies_port" {
+variable "squid_port" {
   description = "Squid proxies ELB port"
 }
