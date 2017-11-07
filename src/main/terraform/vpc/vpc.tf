@@ -328,7 +328,7 @@ resource "aws_security_group" "sg_1" {
 
 # Security Group for Test Hosts
 resource "aws_security_group" "sg_2" {
-  name                         = "${var.environment_name}_sg_1"
+  name                         = "${var.environment_name}_sg_2  "
   vpc_id                       = "${aws_vpc.vpc_2.id}"
 
   # SSH access from Bastion security group

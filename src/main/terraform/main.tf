@@ -1,3 +1,6 @@
+# TODO - fix squid proxy whitelisting
+# TODO - fix NAT gateway timeing issue
+
 # Specify the provider and access details
 provider "aws" {
   region               = "${var.aws_region}"

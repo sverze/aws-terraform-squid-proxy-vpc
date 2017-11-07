@@ -17,7 +17,7 @@ variable "aws_key_name" {
 
 variable "bastion_network_cidr" {
   description = "Bastion network CIDR block range, refine default to makeaccess more secure"
-  default     = "199.253.241.0/24"
+  default     = "0.0.0.0/0"
 }
 
 variable "squid_port" {

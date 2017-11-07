@@ -4,6 +4,7 @@ provider "aws" {
 }
 
 resource "aws_elb" "elb_1" {
+  internal                     = true
   cross_zone_load_balancing    = true
   idle_timeout                 = 300
   connection_draining          = true

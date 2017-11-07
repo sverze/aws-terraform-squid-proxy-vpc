@@ -103,7 +103,26 @@ The best way to test the application is to SSH on to the test host and attempt a
 1. Copy your EC2 key to the bastion host - _scp -i <YOUR_KEY>.pem <YOUR_KEY>.pem ec2-user@<BASTION_HOST_IP>:.ssh/_
 2. SSH to the bastion host - _ssh ~/.ssh/<YOUR_KEY>.pem ec2-user@<BASTION_HOST_IP>_
 3. SSH to the application host - _ssh ~/.ssh/<YOUR_KEY>.pem ec2-user@<APPLICATION_HOST_IP>_
-TODO - more details to follow
+4. cURL a valid website; you should see output that looks like the following
+```
+>curl -I http://www.amazonaws.com
+HTTP/1.1 302 Found
+...
+Via: 1.1 ip-10-1-3-240 (squid/3.5.20)
+Connection: keep-alive
+```
+4. cURL an invalid website; you should see output that looks like the following
+```
+>curl -I http://www.amazonaws.com
+HTTP/1.1 403 Access Denied
+...
+Via: 1.1 ip-10-1-3-240 (squid/3.5.20)
+Connection: keep-alive
+```
+
+The above test proves that access to the internet fromthe private VPC hosted application server can only be achieved 
+through the white listed proxy. To prove this you could remove the export for the _http_proxy_ settings and retry cURL 
+test above; you will find that it timesout because there is no valid route to the internet gateway.
 
 ### Destroy
 
@@ -112,3 +131,7 @@ Clean up your environment by detroying, this will remove all traces:
 ```commandline
 terraform destroy -var 'aws_key_name=your-key.pem'
 ```
+
+### Troubleshooting
+
+TODO - add FAQ for potential issues 
