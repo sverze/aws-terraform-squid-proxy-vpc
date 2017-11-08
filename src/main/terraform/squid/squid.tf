@@ -46,6 +46,19 @@ resource "aws_launch_configuration" "lc_1" {
   }
 }
 
+# required for module interdependencies, specifically the NAT gateways being available
+resource "null_resource" "nat_gateway_1" {
+  triggers {
+    dependency_id = "${var.nat_gateway_1_id}"
+  }
+}
+
+resource "null_resource" "nat_gateway_2" {
+  triggers {
+    dependency_id = "${var.nat_gateway_2_id}"
+  }
+}
+
 resource "aws_autoscaling_group" "asg_1" {
   name                         = "${var.environment_name}_asg_squid_proxy"
   launch_configuration         = "${aws_launch_configuration.lc_1.name}"
@@ -67,6 +80,8 @@ resource "aws_autoscaling_group" "asg_1" {
     value                      = "${var.environment_name}_squid_proxy"
     propagate_at_launch        = true
   }
+
+  depends_on                   = ["null_resource.nat_gateway_1", "null_resource.nat_gateway_2"]
 }
 
 # auto scale up policy

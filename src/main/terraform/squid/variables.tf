@@ -44,8 +44,10 @@ variable "squid_port" {
   description = "Squid proxies ELB port"
 }
 
-variable "depends_on" {
-  description = "A list of reourse ID's that this module depends on in order to complete correctly"
-  type        = "list"
-  default     = []
+variable "nat_gateway_1_id" {
+  description = "The NAT gateway 1 ID is a dependency needed to provision Squid"
+}
+
+variable "nat_gateway_2_id" {
+  description = "The NAT gateway 2 ID is a dependency needed to provision Squid"
 }

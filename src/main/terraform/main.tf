@@ -1,6 +1,3 @@
-# TODO - fix squid proxy whitelisting
-# TODO - fix NAT gateway timeing issue
-
 # Specify the provider and access details
 provider "aws" {
   region               = "${var.aws_region}"
@@ -23,7 +20,8 @@ module "squid" {
   aws_subnet_ids        = ["${module.aws_vpc.sn_3_id}", "${module.aws_vpc.sn_4_id}"]
   aws_ami               = "${lookup(var.aws_amis, var.aws_region)}"
   squid_port            = "${var.squid_port}"
-  depends_on            = ["${module.aws_vpc.ng_1_id}", "${module.aws_vpc.ng_2_id}"]
+  nat_gateway_1_id      = "${module.aws_vpc.ng_1_id}"
+  nat_gateway_2_id      = "${module.aws_vpc.ng_2_id}"
 }
 
 # Bastion host accessible from the public subnet

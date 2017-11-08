@@ -113,8 +113,9 @@ Connection: keep-alive
 ```
 4. cURL an invalid website; you should see output that looks like the following
 ```
->curl -I http://www.amazonaws.com
-HTTP/1.1 403 Access Denied
+>curl -I http://www.google.com
+HTTP/1.1 403 Forbidden
+Server: squid/3.5.20
 ...
 Via: 1.1 ip-10-1-3-240 (squid/3.5.20)
 Connection: keep-alive
@@ -127,7 +128,6 @@ test above; you will find that it timesout because there is no valid route to th
 ### Destroy
 
 Clean up your environment by detroying, this will remove all traces:
-
 ```commandline
 terraform destroy -var 'aws_key_name=your-key.pem'
 ```
