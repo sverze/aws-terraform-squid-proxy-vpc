@@ -134,7 +134,7 @@ resource "aws_route_table" "rt_3" {
   }
 
   route {
-    cidr_block                 = "10.2.0.0/16"
+    cidr_block                 = "${var.aws_private_vpc_cidr}"
     vpc_peering_connection_id  = "${aws_vpc_peering_connection.pc_1.id}"
   }
 
@@ -148,7 +148,7 @@ resource "aws_route_table" "rt_4" {
   vpc_id                       = "${aws_vpc.vpc_2.id}"
 
   route {
-    cidr_block                 = "10.1.0.0/16"
+    cidr_block                 = "${var.aws_public_vpc_cidr}"
     vpc_peering_connection_id  = "${aws_vpc_peering_connection.pc_1.id}"
   }
 
@@ -167,7 +167,7 @@ resource "aws_route_table" "rt_5" {
   }
 
   route {
-    cidr_block                 = "10.2.0.0/16"
+    cidr_block                 = "${var.aws_private_vpc_cidr}"
     vpc_peering_connection_id  = "${aws_vpc_peering_connection.pc_1.id}"
   }
 
@@ -368,8 +368,8 @@ resource "aws_security_group" "sg_3" {
 
   # Squid proxy port
   ingress {
-    from_port                  = 3128
-    to_port                    = 3128
+    from_port                  = "${var.squid_port}"
+    to_port                    = "${var.squid_port}"
     protocol                   = "tcp"
     self                       = true
     security_groups            = ["${aws_security_group.sg_2.id}"]

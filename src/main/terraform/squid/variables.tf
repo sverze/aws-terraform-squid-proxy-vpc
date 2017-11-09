@@ -43,6 +43,14 @@ variable "aws_asg_max_size" {
   default     = 10
 }
 
+variable "aws_public_vpc_cidr" {
+  description = "VPC CIDR block range for the public VPC"
+}
+
+variable "aws_private_vpc_cidr" {
+  description = "VPC CIDR block range for the private VPC"
+}
+
 variable "squid_port" {
   description = "Squid proxies ELB port"
 }

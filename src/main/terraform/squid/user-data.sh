@@ -5,8 +5,8 @@ yum install -y squid
 
 cat > /etc/squid/squid.conf << EOF
 # Local network access to proxy
-acl localnet src 10.1.0.0/16
-acl localnet src 10.2.0.0/16
+acl localnet src ${aws_private_vpc_cidr}
+acl localnet src ${aws_public_vpc_cidr}
 
 # Safe ports that can be used
 acl SSL_ports port 443
@@ -39,7 +39,7 @@ http_access allow localhost
 # And finally deny all other access to this proxy
 http_access deny all
 
-# Squid normally listens to port 3128
+# Squid normally listens to port ${squid_port}
 http_port 3128
 
 # Uncomment and adjust the following to add a disk cache directory.

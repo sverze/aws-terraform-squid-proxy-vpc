@@ -4,6 +4,16 @@ provider "aws" {
   profile                      = "${var.aws_profile}"
 }
 
+data "template_file" "user_data" {
+  template                     = "${file("${path.module}/user-data.sh")}"
+
+  vars {
+    aws_private_vpc_cidr       = "${var.aws_private_vpc_cidr}"
+    aws_public_vpc_cidr        = "${var.aws_public_vpc_cidr}"
+    squid_port                 = "${var.squid_port}"
+  }
+}
+
 resource "aws_elb" "elb_1" {
   internal                     = true
   cross_zone_load_balancing    = true
@@ -40,7 +50,7 @@ resource "aws_launch_configuration" "lc_1" {
   key_name                     = "${var.aws_key_name}"
   security_groups              = ["${var.aws_security_group_id}"]
   associate_public_ip_address  = false
-  user_data                    = "${file("${path.module}/user-data.sh")}"
+  user_data                    = "${data.template_file.user_data.rendered}"
 
   lifecycle {
     create_before_destroy      = true
