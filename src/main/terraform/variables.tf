@@ -1,7 +1,7 @@
 
 variable "environment_name" {
   description = "The name of the environment"
-  default     = "dev"
+  default     = "squid_dev"
 }
 
 variable "aws_region" {
@@ -9,10 +9,14 @@ variable "aws_region" {
   default     = "eu-west-1"
 }
 
+variable "aws_profile" {
+  description = "AWS profile to use other than the default"
+  default     = "default"
+}
+
 # NOTE: The key should be available via your SSH agent, use ssh-add to add this key
 variable "aws_key_name" {
   description = "AWS key name to use, it must exist in the specified region"
-  default = "sverze-dev"
 }
 
 variable "bastion_network_cidr" {

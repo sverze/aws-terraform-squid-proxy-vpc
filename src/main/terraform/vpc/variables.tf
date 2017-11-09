@@ -1,12 +1,19 @@
 
 variable "environment_name" {
     description = "The name of the environment"
-    default     = "dev"
 }
 
 variable "aws_region" {
-  description = "AWS region to launch servers"
-  default     = "eu-west-1"
+  description = "AWS region to create the VPC and services"
+}
+
+variable "aws_profile" {
+  description = "AWS profile to use other than the default"
+  default     = "default"
+}
+
+variable "aws_key_name" {
+  description = "AWS key name to use, it must exist in the specified region"
 }
 
 variable "aws_public_vpc_cidr" {
@@ -54,12 +61,7 @@ variable "aws_sn_7_cidr" {
   default     = "10.2.2.0/24"
 }
 
-variable "aws_key_name" {
-  description = "AWS key name to use, it must exist in the specified region"
-}
-
-
 variable "bastion_network_cidr" {
   description = "Bastion network CIDR block range, refine default to makeaccess more secure"
-  default     = "81.97.16.0/24"
+  default     = "0.0.0.0/0"
 }

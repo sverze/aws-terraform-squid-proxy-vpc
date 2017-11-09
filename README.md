@@ -47,7 +47,11 @@ You will need the following tools and accounts to make it happen
 
 ### AWS Account
 
-You will need an AWS account, just [Sign-Up](https://aws.amazon.com/free)
+You will need an AWS account, if you don't have one then just [Sign-Up](https://aws.amazon.com/free)
+You will need a development user with admin access and security access keys in order to use the AWS CLI
+
+Install the [AWS CLI](https://aws.amazon.com/cli/) and set-up a profile using your access keys
+
 
 ### SSH Key
 
@@ -75,25 +79,26 @@ If you are using OSX I suggest you use [Homebrew](https://brew.sh/) to install t
 
 I suggest that you run a plan to determine that access to your AWS account is as expected.
 Run the following command in the root of the terraform source _src/main/terraform_
-
+Note that it is recommended that you override the default values for _aws_profile_ and the _bastion_network_cidr_
 
 ```commandline
-terraform plan -var 'aws_key_name=your-key.pem'
+terraform plan -var "aws_key_name=your-key-name" -var "aws_region=us-east-1"
 ```
 
 The output of this command will detail all the resources that will be created once applied.
-Note that the default region is set to _eu-west-1_, this value along with others can be overriden e.g.
+Note that it is recommended that you override the default values for _aws_region_ (eu-west-1), _aws_profile_ (default) 
+and the _bastion_network_cidr_ (0.0.0.0/0) e.g.
 
 ```commandline
-terraform plan -var 'aws_key_name=your-key.pem' -var 'aws_region=us-east-1'
+terraform plan -var "aws_key_name=you-key" -var "aws_profile=squid-lab" -var "bastion_network_cidr=199.250.200.0/24"
 ```
 
 ### Apply
 
-Once you are happy with the plan apply the changes as follows
+Once you are happy with the plan apply and decided on what variables to override you can apply your plan e.g. 
 
 ```commandline
-terraform apply -var 'aws_key_name=your-key.pem'
+terraform apply -var "aws_key_name=your-key"
 ```
 
 ### Testing
