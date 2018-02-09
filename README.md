@@ -1,10 +1,10 @@
 # AWS / Terraform Squid Proxy VPC
 
 This project puts together a public network containing an auto scaled group of [Squid Proxy](http://squid-proxy.net/) servers configured 
-to access the internet using NAT Gateways and an egress Internet Gateways. A private VPC is also created peered with the public VPC with proxy 
+to access the internet using NAT Gateways and an Internet Gateways. A private VPC is also created and peered with the public VPC with proxy 
 traffic routed to the Squid Proxy Elastic Load Balancer.
 The provisioning of all the infrastructure and services is done using [Terraform](https://www.terraform.io/).
-All compute servers use the T2 micros with Amazon Linux, note that the architecture shown below requires a region with a minimum of 3 availability zones.
+All compute servers use T2 micros with Amazon Linux, note that the architecture shown below requires a region with a minimum of 3 availability zones.
 
 ![Resilent VPC](aws-terraform-squid-proxy-vpc.png)
 
@@ -29,15 +29,16 @@ acl localnet src 10.2.0.0/16
 We can control access to domains and websites, in our example we control access to the AWS SQS service and the Amazon AWS website it self.
 
 ```commandline
+acl whitelist dstdomain sqs.us-east-1.amazonaws.com
+acl whitelist dstdomain sqs.us-east-2.amazonaws.com
 acl whitelist dstdomain sqs.us-west-1.amazonaws.com
 acl whitelist dstdomain sqs.us-west-2.amazonaws.com
-acl whitelist dstdomain sqs.eu-west-1.amazonaws.com
-acl whitelist dstdomain sqs.eu-west-2.amazonaws.com
-acl whitelist dstdomain sqs.eu-central-1.amazonaws.com
-acl whitelist dstdomain sqs.ap-southeast-1.amazonaws.com
-acl whitelist dstdomain sqs.ap-northeast-1.amazonaws.com
-acl whitelist dstdomain sqs.sa-east-1.amazonaws.com
-acl whitelist dstdomain sqs.ap-southeast-2.amazonaws.com
+acl whitelist repo.us-east-1.amazonaws.com
+acl whitelist repo.eu-west-1.amazonaws.com
+acl whitelist repo.eu-west-2.amazonaws.com
+acl whitelist packages.us-east-1.amazonaws.com
+acl whitelist packages.eu-west-1.amazonaws.com
+acl whitelist packages.eu-west-2.amazonaws.com
 acl whitelist dstdomain www.amazonaws.com
 ```
 
@@ -60,7 +61,7 @@ This project is using London (eu-west-2) as the region I suggest you keep this t
 
 [EC2 Key Pairs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) has instructions on how to set-up your key pair.
 
-Once you have set-up key pair you will have access to the PEM file that needs to be stored safely.
+Once you have set-up a key pair you will should have access to the PEM file that needs to be stored safely.
 Terraform assumes that the PEM is available in your local key chain, you can add it it to your key-chain by running the following command
 
 ```commandline

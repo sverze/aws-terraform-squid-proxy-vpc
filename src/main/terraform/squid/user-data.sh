@@ -20,6 +20,12 @@ acl whitelist dstdomain sqs.us-east-1.amazonaws.com
 acl whitelist dstdomain sqs.us-east-2.amazonaws.com
 acl whitelist dstdomain sqs.us-west-1.amazonaws.com
 acl whitelist dstdomain sqs.us-west-2.amazonaws.com
+acl whitelist repo.us-east-1.amazonaws.com
+acl whitelist repo.eu-west-1.amazonaws.com
+acl whitelist repo.eu-west-2.amazonaws.com
+acl whitelist packages.us-east-1.amazonaws.com
+acl whitelist packages.eu-west-1.amazonaws.com
+acl whitelist packages.eu-west-2.amazonaws.com
 acl whitelist dstdomain www.amazonaws.com
 
 # Deny requests to certain unsafe ports
